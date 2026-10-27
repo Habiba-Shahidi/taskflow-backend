@@ -1,0 +1,31 @@
+Database
+
+mysql -u root -p //12345678
+
+Step 1: See what exists
+At the mysql> prompt, run:
+sql
+SHOW DATABASES;
+You'll see a few built-in ones (information_schema, mysql, performance_schema, sys). Those belong to MySQL itself, so leave them alone.
+
+
+Step 2: Create your project's database and select it
+sql
+CREATE DATABASE taskflow;
+USE taskflow;
+CREATE DATABASE makes the folder. USE says "all my next commands apply to this one." You need USE every time you open a new session, or MySQL won't know which database you mean.
+
+
+Step 3: Create the tasks table
+sql
+CREATE TABLE tasks (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+What each column means:
+id INT AUTO_INCREMENT PRIMARY KEY: a whole number that MySQL fills in itself (1, 2, 3...) and that uniquely identifies each row. This replaces our Math.max trick, and unlike it, ids are never reused after a delete.
+title VARCHAR(255) NOT NULL: text up to 255 characters, and the row can't be saved without it. This mirrors the title field in your array.
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP: MySQL stamps the time automatically when a row is inserted.
+
