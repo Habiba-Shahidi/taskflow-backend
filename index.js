@@ -10,6 +10,10 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 
+// -----------Health Check ----------------
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
 // ---------- PUBLIC ROUTES (no token needed) ----------
 
 app.post('/auth/register', async (req, res) => {
